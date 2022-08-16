@@ -1,1 +1,4 @@
-# TC-1028-Proyecto-Sebastian-Colin
+
+# Proyecto TC 1028  
+
+La idea de este proyecto es realizar un pequeño programa en Python. 
