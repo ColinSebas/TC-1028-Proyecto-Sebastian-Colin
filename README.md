@@ -21,8 +21,11 @@ al final ser otorgado el nombre del mejor juego que pueda formar con sus cartas.
 se le otorgaran nombres con siglas a las cartas con su respectivo palo y color. 
 
 Corazones rojos = CR
+
 Diamantes rojos = DR
+
 Treboles negros = TN
+
 Picas negras = PN 
 
 ## Algorítmo Principal
