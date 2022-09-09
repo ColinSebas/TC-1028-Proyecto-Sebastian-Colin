@@ -36,15 +36,32 @@ def elimina_cartas_de_lista(lista, carta):
             lista.remove(item)
     return lista
 
-def indices_de_cartas(carta):
-    #devuelve el índice de la carta del 1-10 o J, Q, K, A
-    if carta[0] == "1":
-        if carta[1] == "0":
-            indice = str(10)
+def indices(lista):
+    if lista[0][0] == '1':
+        indices = ['10']
     else:
-        indice = str(carta[0])
+        indices = [lista[0][0]]
+    i = 1
+    while i < 7:
+        if lista[i][0] == '1':
+            indices.append('10')
+        else:
+            indices.append(lista[i][0])
+        i += 1
 
-    return indice
+    return indices
+
+def palos(lista):
+    palos = []
+    i = 0
+    while i < 7:
+        if lista[i][0] == '1':
+            palos.append(lista[i][2:4])
+        else:
+            palos.append(lista[i][1:3])
+        i += 1
+        
+    return palos
 
 def analiza_mejor_juego(cartas_completas):
     #analizará el mejor juego
@@ -84,7 +101,12 @@ carta_main_5 = main_cards(lista_de_cartas)
 
 elimina_cartas_de_lista(lista_de_cartas, carta_main_5)
 
+cartas_main_menos1 = [carta_main_1, carta_main_2, carta_main_3, carta_main_4]
+
 cartas_main = [carta_main_1, carta_main_2, carta_main_3, carta_main_4, carta_main_5]
+
+cartas_total = [carta_main_1, carta_main_2, carta_main_3, carta_main_4, carta_main_5, 
+carta_1, carta_2]
 
 """ ======== Zona de Pruebas de Print ==================
 
@@ -107,11 +129,30 @@ time.sleep(2)
 opcion = int(input("¿Deseas continuar el juego? \n \n 1 = si 0 = no \n"))
 
 if opcion == 1:
-    print(cartas_main)
+    time.sleep(2)
+    print("Siguiente carta: \n", cartas_main_menos1)
 elif opcion == 0:
+    time.sleep(1)
     print("Te has doblado.")
 else:
+    time.sleep(1)
     print("La opción introducida es inválida")
+
+time.sleep(2)
+elige_2 = int(input("¿Deseas continuar el juego? \n \n 1 = si 0 = no \n"))
+
+if elige_2 == 1:
+    time.sleep(2)
+    print("Última carta: \n", cartas_main)
+elif opcion == 0:
+    time.sleep(1)
+    print("Te has doblado.")
+else:
+    time.sleep(1)
+    print("La opción introducida es inválida")
+
+
+
 
 
 
