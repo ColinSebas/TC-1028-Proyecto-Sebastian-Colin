@@ -4,7 +4,9 @@
 #Bilbliotecas
 import math 
 import random 
-import time 
+import time
+
+from program import repeticion 
 
 # Lista de todas las cartas del deck
 
@@ -37,6 +39,29 @@ def elimina_cartas_de_lista(lista, carta):
     return lista
 
 def indices(lista):
+    # Lista de enteros dadas las 7 cartas totales
+    indices = []
+    i = 0
+    while i < len(lista):
+        if lista[i][0] == '1':
+            indices.append(10)
+        elif lista[i][0] == 'J':
+            indices.append(11)
+        elif lista[i][0] == 'Q':
+            indices.append(12)
+        elif lista[i][0] == 'K':
+            indices.append(13)
+        elif lista[i][0] == 'A':
+            indices.append(14)
+        else:
+            index = lista[i][0]
+            index = int(index)
+            indices.append(index)
+        i += 1
+
+    return indices 
+    """ ====== Función previan(referencia)
+    
     if lista[0][0] == '1':
         indices = ['10']
     else:
@@ -51,10 +76,13 @@ def indices(lista):
 
     return indices
 
+    """
+
 def palos(lista):
+    # Lista de palos de las 7 cartas totales
     palos = []
     i = 0
-    while i < 7:
+    while i < len(lista):
         if lista[i][0] == '1':
             palos.append(lista[i][2:4])
         else:
@@ -62,6 +90,35 @@ def palos(lista):
         i += 1
         
     return palos
+
+def mayor_repeticion(cartas_full):
+    # Busca el número más repetido en la lista de cartas
+    diccionario = {}
+
+    for x in cartas_full:
+        diccionario[x] = 0
+    
+    for x in cartas_full:
+        diccionario[x] = diccionario[x] + 1
+    
+    max_val = cartas_full[0]
+    max_repe = diccionario[max_val]
+
+    for key in diccionario:
+        if diccionario[key] > max_repe:
+            max_repe = diccionario[key]
+            max_val = key
+
+    dos_val = []
+
+    for key in diccionario:
+        if diccionario[key] == max_repe:
+            dos_val.append(key)
+
+    
+    return max_val, max_repe, diccionario, dos_val
+
+
 
 def analiza_mejor_juego(cartas_completas):
     #analizará el mejor juego
@@ -108,6 +165,11 @@ cartas_main = [carta_main_1, carta_main_2, carta_main_3, carta_main_4, carta_mai
 cartas_total = [carta_main_1, carta_main_2, carta_main_3, carta_main_4, carta_main_5, 
 carta_1, carta_2]
 
+cards_indexes = sorted(indices(cartas_total))
+cards_suits = sorted(palos(cartas_total))
+repeticion_max = mayor_repeticion(cards_indexes)
+
+
 """ ======== Zona de Pruebas de Print ==================
 
 print(cartas_usuario, "\n\n" , cartas_main_primeras_tres, "\n\n", lista_de_cartas)
@@ -150,6 +212,26 @@ elif opcion == 0:
 else:
     time.sleep(1)
     print("La opción introducida es inválida")
+
+time.sleep(2)
+print(cards_indexes)
+
+time.sleep(2)
+print(repeticion_max)
+
+time.sleep(1)
+
+if len(repeticion_max[3]) == 1:
+    if repeticion_max[1] == 2:
+        print("Tuviste un par de:", repeticion_max[0])
+    elif repeticion_max[1] == 3:
+        print("Tuviste una tercia de:", repeticion_max[0])
+    elif repeticion_max[1] == 4:
+        print("Tuviste un póquer de:", repeticion_max[0])
+else: 
+    print("Tuviste dos pares de:", repeticion_max[-1][0], "y", repeticion_max[-1][1])
+
+
 
 
 
