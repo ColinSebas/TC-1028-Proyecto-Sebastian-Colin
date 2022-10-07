@@ -135,6 +135,8 @@ cartas_main = [carta_main_1, carta_main_2, carta_main_3, carta_main_4, carta_mai
 cartas_total = [carta_main_1, carta_main_2, carta_main_3, carta_main_4, carta_main_5, 
 carta_1, carta_2]
 
+matriz_total = [[indices(cartas_total)], [palos(cartas_total)]]
+
 cards_indexes = sorted(indices(cartas_total))
 cards_suits = sorted(palos(cartas_total))
 repeticion_max = mayor_repeticion(cards_indexes)
@@ -159,6 +161,7 @@ if opcion == 1:
         time.sleep(2)
         print("Última carta: \n", cartas_main)
         time.sleep(2)
+        print(matriz_total)
         print(cards_indexes)
         time.sleep(2)
         print(repeticion_max)
