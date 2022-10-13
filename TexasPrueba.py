@@ -1,13 +1,21 @@
 """
 ====== Programa de Póquer, Texas Hold'Em ======
+
+Simulador de una mano de Texas Hold'Em repartida a 
+un sólo jugador. Genera cartas aleatorias que permiten
+al usuario decicir o no quedarse en el juego. Al final
+devuelve el mejor juego númerico (par, dos pares, tercia
+o póquer) que se obtuvo. 
 """
-#Bilbliotecas
+#bilbliotecas
 import math 
 import random 
 import time
  
 
-# Lista de todas las cartas del deck
+"""
+Lista de Cartas de una baraja inglesa estándar
+"""
 
 lista_de_cartas = ["2CR", "3CR","4CR", "5CR", "6CR", "7CR","8CR", "9CR", "10CR"
 , "JCR", "QCR", "KCR", "ACR", "2DR", "3DR","4DR", "5DR", "6DR", "7DR","8DR", "9DR", "10DR"
@@ -21,19 +29,36 @@ lista_de_cartas = ["2CR", "3CR","4CR", "5CR", "6CR", "7CR","8CR", "9CR", "10CR"
 """
 
 def cards(lista):
-    # Función para repartir cartas al azar
+    """
+    (uso de funciones)
+    Recibe: lista de cartas de baraja inglesa completa (lista).
+    Devuelve: carta al azar generada a partir de la lista.
+    """
     carta = random.choice(lista)
     return carta
 
 def elimina_cartas_de_lista(lista, carta):
-    # Función para eliminar cartas de la lista y que no se repitan
+    """
+    (ciclos for, condicionales, funciones)
+    Recibe: lista de cartas de baraja ingles completa (lista).
+    Elimina la carta generada al azar en la función 'cards'.
+    Devuelve: la lista sin la carta especificada. 
+    """
     for item in lista[:]:
         if item == carta:
             lista.remove(item)
     return lista
 
 def indices(lista):
-    # Lista de enteros dadas las 7 cartas totales
+    """
+    (ciclos while, listas, condicionales, uso de operadores)
+    Recibe: lista de las siete cartas que están en juego, dos 
+    del jugador y cinco en la mesa.
+    Genera una lista exclusiva de los índices de las cartas 
+    (números). 
+    Devuelve: la lista 'indices' con los valores numéricos de las
+    cartas.
+    """
     indices = []
     i = 0
     while i < len(lista):
@@ -56,7 +81,14 @@ def indices(lista):
     return indices 
 
 def palos(lista):
-    # Lista de palos de las 7 cartas totales
+    """
+    (ciclos while, condicionales, uso de operadores)
+    Recibe: lista de las siete cartas que están en juego, dos 
+    del jugador y cinco en la mesa.
+    Genera una lista exclusiva de los palos de las cartas 
+    (corazones, picas, treboles, diamantes). 
+    Devuelve: la lista 'palos' con los palos de las cartas.
+    """
     palos = []
     i = 0
     while i < len(lista):
@@ -69,7 +101,16 @@ def palos(lista):
     return palos
 
 def mayor_repeticion(cartas_full):
-    # Busca el número más repetido en la lista de cartas
+    """
+    (ciclos for, condicionales, listas, diccionarios)
+    Recibe: lista de las siete cartas que están en juego, dos 
+    del jugador y cinco en la mesa.
+    Genera un diccionario con en número de repeticiones de cada
+    carta en juego. Y checha si hay dos valores máximos repetidos. 
+    Devuelve: la carta con valor máximo y su número de repeticiones, 
+    el diccionario con las cartas y en caso de que hayan dos valores 
+    máximos, una lista con ambos. 
+    """
     diccionario = {}
 
     for x in cartas_full:
@@ -95,6 +136,9 @@ def mayor_repeticion(cartas_full):
     
     return max_val, max_repe, diccionario, dos_val
 
+"""
+============== Estructura principal del programa ====================
+"""
 
 carta_1 = cards(lista_de_cartas)
 
@@ -141,6 +185,8 @@ cards_indexes = sorted(indices(cartas_total))
 cards_suits = sorted(palos(cartas_total))
 repeticion_max = mayor_repeticion(cards_indexes)
 
+
+#Inicio de interacción con usuario
 print("Estas son tus cartas: \n", cartas_usuario)
 
 time.sleep(3)
@@ -170,12 +216,20 @@ if opcion == 1:
         if len(repeticion_max[3]) == 1:
             if repeticion_max[1] == 2:
                 print("Tuviste un par de:", repeticion_max[0])
+                puntos = repeticion_max[0] * 2
+                print("Hiciste", puntos, "puntos")
             elif repeticion_max[1] == 3:
                 print("Tuviste una tercia de:", repeticion_max[0])
+                puntos = repeticion_max[0] * 3
+                print("Hiciste", puntos, "puntos")
             elif repeticion_max[1] == 4:
                 print("Tuviste un póquer de:", repeticion_max[0])
+                puntos = repeticion_max[0] * 4
+                print("Hiciste", puntos, "puntos")
         else: 
             print("Tuviste dos pares de:", repeticion_max[-1][0], "y", repeticion_max[-1][1])
+            puntos = (repeticion_max[-1][0] * 2) + (repeticion_max[-1][1] * 2)
+            print("Hiciste", puntos, "puntos")
     elif elige_2 == 0:
         time.sleep(1)
         print("Te has doblado.")

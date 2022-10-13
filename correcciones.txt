@@ -1,0 +1,23 @@
+# Correcciones del proyecto Texas Hold'Em Póquer
+
+Sebastián Colín de la Barreda 
+A01710148
+
+Conforme se fueron viendo los temas, se incorporaron avances con estos. Primeramente, el proyecto 
+se modificó para poder generar las cartas al azar que tendría el usuario en su juego, almacenándolas
+todas en una lista. Con esto después se incorporó una función que pudiera convertir las cartas en 
+sólo sus valores numéricos para el análisis de máxima repetición, esto con el fin de simplificar 
+este proceso. 
+
+El proyecto original buscaba decirte tu mejor juego ya fuese numérico o tomando en cuenta los palos, 
+pero se simplificó debido al tiempo y actualmente el programa te devuelve si hiciste un par, dos pares,
+una tercia o un póoquer. Posteriormente también se generó una función para analizar el valor de mayor
+repetición en la lista numérica mediante un diccionario (como visto en clase) para determinar las 
+cartas con mayor repetición y poder devolve run resultado. 
+
+Después, también se agregaron una serie de condicionales para que el usuario pueda optar por doblarse y 
+el programa termina, o continuar y poder decidir se le conviene o no su juego. Dentro de estos también se 
+incorporaron pausas para que el usuario pueda observar lo que hay en juego. Finalmente, en este avance 
+se incorporó un pequeño contador de puntos que te devuelve la suma de puntos que hiciste en tu juego
+tomando en cuenta el valor numérico de las cartas y se revisó para adaptarse correctamente al los 
+estándares PEP 8. 
