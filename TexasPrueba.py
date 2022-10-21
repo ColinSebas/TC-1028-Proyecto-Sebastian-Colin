@@ -9,19 +9,21 @@ o póquer) que se obtuvo.
 """
 #bilbliotecas
 import math 
-import random 
+import random
+from re import RegexFlag 
 import time
  
-
 """
 Lista de Cartas de una baraja inglesa estándar
 """
 
-lista_de_cartas = ["2CR", "3CR","4CR", "5CR", "6CR", "7CR","8CR", "9CR", "10CR"
-, "JCR", "QCR", "KCR", "ACR", "2DR", "3DR","4DR", "5DR", "6DR", "7DR","8DR", "9DR", "10DR"
-, "JDR", "QDR", "KDR", "ADR", "2TN", "3TN","4TN", "5TN", "6TN", "7TN","8TN", "9TN", "10TN"
-, "JTN", "QTN", "KTN", "ATN", "2PN", "3PN","4PN", "5PN", "6PN", "7PN","8PN", "9PN", "10PN"
-, "JPN", "QPN", "KPN", "APN" ]
+lista_de_cartas = [
+  "2CR", "3CR","4CR", "5CR", "6CR", "7CR","8CR", "9CR", "10CR",
+  "JCR", "QCR", "KCR", "ACR", "2DR", "3DR","4DR", "5DR", "6DR",
+  "7DR","8DR", "9DR", "10DR", "JDR", "QDR", "KDR", "ADR", "2TN",
+  "3TN","4TN", "5TN", "6TN", "7TN","8TN", "9TN", "10TN", "JTN", 
+  "QTN", "KTN", "ATN", "2PN", "3PN","4PN", "5PN", "6PN", "7PN",
+  "8PN", "9PN", "10PN", "JPN", "QPN", "KPN", "APN" ]
 
 """
 ==== Funciones creadas para el programa ====
@@ -136,6 +138,28 @@ def mayor_repeticion(cartas_full):
     
     return max_val, max_repe, diccionario, dos_val
 
+def regresa_a_letra(indice):
+    """
+    (condicionales)
+    Recibe: el indice de una carta > 10 
+    y la convierte de regreso a una letra.
+    Regresa: indice numérico convertido a 
+    letra. 
+    """
+    if indice < 11:
+        letra = indice
+    elif indice == 11:
+        letra = 'J'
+    elif indice == 12:
+        letra = 'Q'
+    elif indice == 13:
+        letra = 'K'
+    elif indice == 14:
+        letra = 'A'
+
+    return letra 
+
+
 """
 ============== Estructura principal del programa ====================
 """
@@ -174,7 +198,8 @@ elimina_cartas_de_lista(lista_de_cartas, carta_main_5)
 
 cartas_main_menos1 = [carta_main_1, carta_main_2, carta_main_3, carta_main_4]
 
-cartas_main = [carta_main_1, carta_main_2, carta_main_3, carta_main_4, carta_main_5]
+cartas_main = [carta_main_1, carta_main_2, carta_main_3, carta_main_4,
+carta_main_5]
 
 cartas_total = [carta_main_1, carta_main_2, carta_main_3, carta_main_4, carta_main_5, 
 carta_1, carta_2]
@@ -184,7 +209,6 @@ matriz_total = [[indices(cartas_total)], [palos(cartas_total)]]
 cards_indexes = sorted(indices(cartas_total))
 cards_suits = sorted(palos(cartas_total))
 repeticion_max = mayor_repeticion(cards_indexes)
-
 
 #Inicio de interacción con usuario
 print("Estas son tus cartas: \n", cartas_usuario)
@@ -207,28 +231,32 @@ if opcion == 1:
         time.sleep(2)
         print("Última carta: \n", cartas_main)
         time.sleep(2)
-        print(matriz_total)
         print(cards_indexes)
-        time.sleep(2)
+        print(cards_suits)
         print(repeticion_max)
-        time.sleep(1)
-
         if len(repeticion_max[3]) == 1:
             if repeticion_max[1] == 2:
-                print("Tuviste un par de:", repeticion_max[0])
+                print("Tuviste un par de: ", regresa_a_letra(repeticion_max[0]))
                 puntos = repeticion_max[0] * 2
+                time.sleep(1)
                 print("Hiciste", puntos, "puntos")
             elif repeticion_max[1] == 3:
-                print("Tuviste una tercia de:", repeticion_max[0])
+                print("Tuviste una tercia de: ", regresa_a_letra(repeticion_max[0]))
                 puntos = repeticion_max[0] * 3
+                time.sleep(1)
                 print("Hiciste", puntos, "puntos")
             elif repeticion_max[1] == 4:
-                print("Tuviste un póquer de:", repeticion_max[0])
+                print("Tuviste un póquer de: ", regresa_a_letra(repeticion_max[0]))
                 puntos = repeticion_max[0] * 4
                 print("Hiciste", puntos, "puntos")
-        else: 
-            print("Tuviste dos pares de:", repeticion_max[-1][0], "y", repeticion_max[-1][1])
+        elif len(repeticion_max[3]) == 2: 
+            print("Tuviste dos pares de: ", regresa_a_letra(repeticion_max[-1][0]),
+            "y", regresa_a_letra(repeticion_max[-1][1]))
             puntos = (repeticion_max[-1][0] * 2) + (repeticion_max[-1][1] * 2)
+            print("Hiciste", puntos, "puntos")
+        else:
+            print("Tuviste una carta alta: ", regresa_a_letra(max(repeticion_max[3])))
+            puntos = max(repeticion_max[3])
             print("Hiciste", puntos, "puntos")
     elif elige_2 == 0:
         time.sleep(1)
