@@ -211,13 +211,18 @@ cards_suits = sorted(palos(cartas_total))
 repeticion_max = mayor_repeticion(cards_indexes)
 
 #Inicio de interacción con usuario
+print("Guia de cartas: \n \n CR = Corazones Rojos, DR = Diamantes Rojos, \
+TN = Treboles Negros, PN = Picas Negras")
+
+time.sleep(3)
+
 print("Estas son tus cartas: \n", cartas_usuario)
 
 time.sleep(3)
 
 print("Cartas principales: \n" ,cartas_main_primeras_tres)
 
-time.sleep(2)
+time.sleep(3)
 
 opcion = int(input("¿Deseas continuar el juego? \n \n 1 = si 0 = no \n"))
 
@@ -229,11 +234,8 @@ if opcion == 1:
 
     if elige_2 == 1:
         time.sleep(2)
-        print("Última carta: \n", cartas_main)
+        print("Ultima carta: \n", cartas_main)
         time.sleep(2)
-        print(cards_indexes)
-        print(cards_suits)
-        print(repeticion_max)
         if len(repeticion_max[3]) == 1:
             if repeticion_max[1] == 2:
                 print("Tuviste un par de: ", regresa_a_letra(repeticion_max[0]))
@@ -263,13 +265,13 @@ if opcion == 1:
         print("Te has doblado.")
     else:
         time.sleep(1)
-        print("La opción introducida es inválida")
+        print("La opcion introducida es invalida")
 elif opcion == 0:
     time.sleep(1)
     print("Te has doblado.")
 else:
     time.sleep(1)
-    print("La opción introducida es inválida")
+    print("La opción introducida es invalida")
 
 
 
