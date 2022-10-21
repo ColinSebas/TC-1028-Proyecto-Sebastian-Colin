@@ -224,7 +224,7 @@ print("Cartas principales: \n" ,cartas_main_primeras_tres)
 
 time.sleep(3)
 
-opcion = input("¿Deseas continuar el juego? \n \n 1 = si 0 = no \n")
+opcion = int(input("¿Deseas continuar el juego? \n \n 1 = si 0 = no \n"))
 
 if opcion == 1:
     time.sleep(2)
